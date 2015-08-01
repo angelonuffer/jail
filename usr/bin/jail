@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+copy_commands="bash ls vim cat"
+jail_dir="/usr/share/jail/section_1"
+mkdir -p $jail_dir
+for command_name in $copy_commands
+do
+	which $command_name | xargs -I %s dirname $jail_dir%s | xargs mkdir -p
+	which $command_name | xargs -I %s cp %s $jail_dir%s
+	which $command_name | xargs ldd | grep -o "/.*\.[0-9]" | xargs -I %s dirname $jail_dir%s | uniq | xargs mkdir -p
+	which $command_name | xargs ldd | grep -o "/.*\.[0-9]" | xargs -I %s cp %s $jail_dir%s
+done
+chroot $jail_dir
+rm -rf $jail_dir
