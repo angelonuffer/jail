@@ -14,8 +14,16 @@ gnu_coreutils_commands="chcon chgrp chown chmod cp dd df dir dircolors install
 			timeout true tty uname unlink uptime users who whoami
 			yes"
 copy_commands="bash $gnu_coreutils_commands"
-jail_dir="/usr/share/jail/$jail_name"
 build_script="/dev/null"
+
+[ -f "$1" ] && while read -r line
+do
+	option=`echo $line | cut -d : -f 1`
+	value=`echo $line | cut -d : -f 2`
+	export $option=$value
+done < "$1"
+
+jail_dir="/usr/share/jail/$jail_name"
 
 build_jail() {
 	mkdir -p $jail_dir
