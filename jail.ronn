@@ -1,0 +1,40 @@
+jail(1) -- create configurable jails
+====================================
+
+## SYNOPSIS
+
+`jail` list
+
+`jail` build [OPTIONS] [-c FILE]
+
+`jail` enter [NAME]
+
+## DESCRIPTION
+
+`jail` creates configurable jails to enter using chroot.
+
+Choose the commands you want with you into your jail.
+
+You have the freedom to do what you want into your jail without the risk of
+break your host system.
+
+## OPTIONS
+
+build options
+-------------
+
+* `-c` <file>:
+    Set the configuration file.
+    Each line of the file contains field and value separated by ":" char.
+    Configuration fields are _jail_name_, _copy_commands_ and _build_script_.
+
+* `-r`:
+    Rebuild jail.
+
+## AUTHOR
+
+Written by Angelo Nuffer.
+
+## SEE ALSO
+
+chroot(8)
